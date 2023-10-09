@@ -2,14 +2,9 @@ extends Entity
 
 #signal enemy_attack(pos : Vector2, dir : Vector2, damage : int, attacker: String)
 
-##### FUNCTIONS #####
 
-func _process(_delta):
-	pass
-
-
-func _physics_process(_delta : float) -> void:
-	pass
+func _ready() -> void:
+	speed = 100
 
 
 # Wandering - Wanders around, not firing and just moving around the map

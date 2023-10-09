@@ -352,9 +352,11 @@ texture = SubResource("CanvasTexture_dkkdw")
 position = Vector2(781, 348)
 rotation = -1.53907
 
-[node name="Player" parent="." instance=ExtResource("1_unorg")]
+[node name="Player" parent="." node_paths=PackedStringArray("PlayerCamera") groups=["player"] instance=ExtResource("1_unorg")]
+unique_name_in_owner = true
 z_index = 1
-position = Vector2(448, 163)
+position = Vector2(450, 161)
+PlayerCamera = NodePath("PlayerCamera")
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
 unique_name_in_owner = true

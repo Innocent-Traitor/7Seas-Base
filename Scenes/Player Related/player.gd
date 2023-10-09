@@ -1,11 +1,15 @@
 extends Entity
 
+@export var PlayerCamera : Camera2D
 
-@onready var PlayerCamera : Camera2D = get_node("%PlayerCamera")
+#@onready var PlayerCamera : Camera2D = get_node("%PlayerCamera") I have no idea why this fucking broke
+@onready var LeftCannon : Marker2D = get_node("%LeftCannon")
+@onready var RightCannon : Marker2D = get_node("%RightCannon")
 
 signal player_attack(pos : Vector2, dir : Vector2, damage : int, attacker: String)
 signal player_hit(health : float)
 
+var doPhysics : bool= true
 ##### FUNCTIONS #####
 
 func _ready():
@@ -21,10 +25,21 @@ func _process(_delta):
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("Fire"):
-		player_attack.emit($Marker2D.global_position, (get_global_mouse_position() - position).normalized(), damage, "Player")
+	if event.is_action_pressed("LeftFire") and not onCooldown:
+		var direction = ((get_global_mouse_position() - position).normalized()).rotated(deg_to_rad(randf_range(-70, -80)))
+		player_attack.emit(LeftCannon.global_position, direction, damage, "Player")
 		onCooldown = true
 		$CooldownTimer.start()
+
+	if event.is_action_pressed("RightFire") and not onCooldown:
+		var direction = ((get_global_mouse_position() - position).normalized()).rotated(deg_to_rad(randf_range(70, 80)))
+		player_attack.emit(RightCannon.global_position, direction, damage, "Player")
+		onCooldown = true
+		$CooldownTimer.start()
+	
+	if event.is_action_pressed("ui_accept"):
+		set_physics_process(doPhysics)
+		doPhysics = !doPhysics
 
 func _physics_process(_delta: float) -> void:
 	var mousePos = get_global_mouse_position()
@@ -41,3 +56,7 @@ func _physics_process(_delta: float) -> void:
 		velocity *= 0.33
 	
 	move_and_slide()
+
+
+func _on_cooldow_timer_timeout():
+	onCooldown = false
