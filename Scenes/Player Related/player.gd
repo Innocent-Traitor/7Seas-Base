@@ -19,13 +19,12 @@ func _process(_delta):
 
 	PlayerCamera.global_position = position
 
-	# Firing Input | Potentially move this into an unhandled input
-	# TODO: Research unhandled input vs _process input handling
-	if Input.is_action_just_pressed("Fire") and !onCooldown:
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("Fire"):
 		player_attack.emit($Marker2D.global_position, (get_global_mouse_position() - position).normalized(), damage, "Player")
 		onCooldown = true
 		$CooldownTimer.start()
-
 
 func _physics_process(_delta: float) -> void:
 	var mousePos = get_global_mouse_position()
