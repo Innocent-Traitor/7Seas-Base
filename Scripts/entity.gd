@@ -17,6 +17,7 @@ var damage : int = 1        ## 1, 2, 3, 4, 5             | Each one does +10 dam
 var addedSpeed : float = 1  ## 1, 1.1, 1.2, 1.3, 1.4     | Each one moves the ship 10% faster
 var cannons : int = 1       ## 1, 2, 3                   | How many cannons the ship has
 
+
 func _on_hitbox_body_entered(body : Node2D) -> void:
 	if body.is_in_group("Projectiles"):
 		var damageTaken = body.damage

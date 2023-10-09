@@ -4,8 +4,12 @@ extends Entity
 @onready var PlayerCamera : Camera2D = get_node("%PlayerCamera")
 
 signal player_attack(pos : Vector2, dir : Vector2, damage : int, attacker: String)
+signal player_hit(health : float)
 
 ##### FUNCTIONS #####
+
+func _ready():
+	player_hit.emit(health)
 
 func _process(_delta):
 	# Look towards the mouse and lerp it

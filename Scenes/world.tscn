@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://28dxtmy5x13u"]
+[gd_scene load_steps=11 format=3 uid="uid://28dxtmy5x13u"]
 
 [ext_resource type="Shader" path="res://water.gdshader" id="1_ki02m"]
 [ext_resource type="Script" path="res://Scenes/game_manager.gd" id="1_qflio"]
 [ext_resource type="PackedScene" uid="uid://bugglxem35004" path="res://Scenes/Player Related/player.tscn" id="1_unorg"]
 [ext_resource type="PackedScene" uid="uid://cukt37p7rqudn" path="res://Scenes/enemy.tscn" id="3_ln25d"]
 [ext_resource type="Texture2D" uid="uid://cfcnik0j82xtj" path="res://Tilesheets/tilesheet.png" id="4_bbvrl"]
+[ext_resource type="PackedScene" uid="uid://oq8ex8vsv1il" path="res://Scenes/gui.tscn" id="6_v76wr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ui55b"]
 shader = ExtResource("1_ki02m")
@@ -366,4 +367,8 @@ tile_set = SubResource("TileSet_47qn0")
 format = 2
 layer_0/tile_data = PackedInt32Array(-65539, 196610, 2, -3, 524290, 2, 65533, 524290, 1, 131069, 524290, 2, 196605, 524290, 1, 262141, 524290, 2, 327677, 524290, 1, 393213, 524290, 2, 458749, 524290, 1, 524285, 524290, 2, 589821, 524290, 1, 655357, 524290, 2, 720893, 524290, 1, 786429, 524290, 2, 851965, 196610, 3, -65538, 393218, 3, -65537, 458754, 3, -131072, 393218, 3, -131071, 458754, 3, -131070, 393218, 3, -131069, 458754, 3, -131068, 393218, 3, -131067, 458754, 3, -131066, 393218, 3, -131065, 458754, 3, -131064, 393218, 3, -131063, 458754, 3, -131062, 393218, 3, -131061, 458754, 3, -131060, 393218, 3, -131059, 458754, 3, -131058, 393218, 3, -131057, 458754, 3, -131056, 393218, 3, -131055, 458754, 3, -131054, 393218, 3, -131053, 458754, 3, -131052, 262146, 2, -65516, 327682, 1, 20, 327682, 2, 65556, 327682, 1, 131092, 327682, 2, 196628, 327682, 1, 262164, 327682, 2, 327700, 327682, 1, 393236, 327682, 2, 458772, 327682, 1, 524308, 327682, 2, 589844, 327682, 1, 655380, 327682, 2, 720916, 327682, 1, 786452, 262146, 3, 851966, 393218, 0, 851967, 458754, 0, 786432, 393218, 0, 786433, 458754, 0, 786434, 393218, 0, 786435, 458754, 0, 786436, 393218, 0, 786437, 458754, 0, 786438, 393218, 0, 786439, 458754, 0, 786440, 393218, 0, 786441, 458754, 0, 786442, 393218, 0, 786443, 458754, 0, 786444, 393218, 0, 786445, 458754, 0, 786446, 393218, 0, 786447, 458754, 0, 786448, 393218, 0, 786449, 458754, 0, 786450, 393218, 0, 786451, 458754, 0)
 
+[node name="GUI" parent="." instance=ExtResource("6_v76wr")]
+
 [connection signal="player_attack" from="Player" to="." method="_on_player_attack"]
+[connection signal="player_attack" from="Player" to="GUI" method="_on_player_attack"]
+[connection signal="player_hit" from="Player" to="GUI" method="_on_player_hit"]
