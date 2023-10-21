@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cukt37p7rqudn"]
+[gd_scene load_steps=10 format=3 uid="uid://cukt37p7rqudn"]
 
 [ext_resource type="Script" path="res://Scenes/enemy.gd" id="1_hiwk1"]
 [ext_resource type="Texture2D" uid="uid://oj77ilhv6gw1" path="res://Sprites/enemy_ship.png" id="1_xy00c"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/finiteStateMachine.gd" id="3_4viwm"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemyFollowState.gd" id="4_omkgh"]
+[ext_resource type="PackedScene" uid="uid://bow1yro2qa0ye" path="res://Scenes/stateMachine/enemy_attack_state.tscn" id="5_4yj5d"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/EnemyRunState.gd" id="5_jka82"]
 [ext_resource type="PackedScene" uid="uid://csh4ota6s6kx7" path="res://Scenes/stateMachine/enemy_wander_state.tscn" id="5_pptia"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sa0pc"]
@@ -14,9 +16,9 @@ height = 104.0
 radius = 15.0333
 
 [node name="Enemy" type="CharacterBody2D"]
-position = Vector2(-1, -1)
+position = Vector2(-1, -2)
 collision_layer = 4
-collision_mask = 19
+collision_mask = 17
 script = ExtResource("1_hiwk1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -49,6 +51,13 @@ state = NodePath("EnemyWanderState")
 
 [node name="EnemyFollowState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor")]
 script = ExtResource("4_omkgh")
+actor = NodePath("../..")
+
+[node name="EnemyAttackState" parent="FiniteStateMachine" node_paths=PackedStringArray("actor") instance=ExtResource("5_4yj5d")]
+actor = NodePath("../..")
+
+[node name="EnemyRunState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor")]
+script = ExtResource("5_jka82")
 actor = NodePath("../..")
 
 [node name="EnemyWanderState" parent="FiniteStateMachine" node_paths=PackedStringArray("actor") instance=ExtResource("5_pptia")]

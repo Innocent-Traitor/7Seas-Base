@@ -31,15 +31,24 @@ debug_color = Color(0.988235, 0, 0.301961, 0.419608)
 rotation = -1.5708
 shape = SubResource("CircleShape2D_ay1cu")
 
-[node name="RightCannon" type="Marker2D" parent="."]
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Cannons" type="Node2D" parent="."]
+
+[node name="RightCannon" type="Marker2D" parent="Cannons"]
 unique_name_in_owner = true
 position = Vector2(0, 19)
 
-[node name="LeftCannon" type="Marker2D" parent="."]
+[node name="FrontCannon" type="Marker2D" parent="Cannons"]
+unique_name_in_owner = true
+position = Vector2(49, 0)
+
+[node name="LeftCannon" type="Marker2D" parent="Cannons"]
 unique_name_in_owner = true
 position = Vector2(0, -19)
 
-[node name="CooldownTimer" type="Timer" parent="."]
-one_shot = true
+[node name="PlayerCamera" type="Camera2D" parent="."]
+unique_name_in_owner = true
 
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

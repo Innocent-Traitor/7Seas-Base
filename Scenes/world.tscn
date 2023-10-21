@@ -2,8 +2,8 @@
 
 [ext_resource type="Shader" path="res://water.gdshader" id="1_ki02m"]
 [ext_resource type="Script" path="res://Scenes/game_manager.gd" id="1_qflio"]
-[ext_resource type="PackedScene" uid="uid://bugglxem35004" path="res://Scenes/Player Related/player.tscn" id="1_unorg"]
-[ext_resource type="PackedScene" uid="uid://cukt37p7rqudn" path="res://Scenes/enemy.tscn" id="3_ln25d"]
+[ext_resource type="Script" path="res://Scenes/EnemyManager.gd" id="3_6wgev"]
+[ext_resource type="Script" path="res://Scenes/PlayersManager.gd" id="3_ac1f7"]
 [ext_resource type="Texture2D" uid="uid://cfcnik0j82xtj" path="res://Tilesheets/tilesheet.png" id="4_bbvrl"]
 [ext_resource type="PackedScene" uid="uid://oq8ex8vsv1il" path="res://Scenes/gui.tscn" id="6_v76wr"]
 
@@ -339,29 +339,28 @@ tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 16
 sources/2 = SubResource("TileSetAtlasSource_yu5dp")
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" groups=["game_manager"]]
 script = ExtResource("1_qflio")
 
 [node name="WaterShader" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_ui55b")
 position = Vector2(584.5, 369)
 scale = Vector2(1479, 924)
 texture = SubResource("CanvasTexture_dkkdw")
 
-[node name="Enemy" parent="." instance=ExtResource("3_ln25d")]
-position = Vector2(781, 348)
-rotation = -1.53907
+[node name="PlayersManager" type="Node2D" parent="."]
+script = ExtResource("3_ac1f7")
 
-[node name="Player" parent="." node_paths=PackedStringArray("PlayerCamera") groups=["player"] instance=ExtResource("1_unorg")]
-unique_name_in_owner = true
-z_index = 1
-position = Vector2(450, 161)
-PlayerCamera = NodePath("PlayerCamera")
+[node name="EnemyManager" type="Node2D" parent="."]
+script = ExtResource("3_6wgev")
 
-[node name="PlayerCamera" type="Camera2D" parent="Player"]
-unique_name_in_owner = true
+[node name="SpawnTimer" type="Timer" parent="EnemyManager"]
+one_shot = true
+autostart = true
 
 [node name="Projectiles" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -371,6 +370,5 @@ layer_0/tile_data = PackedInt32Array(-65539, 196610, 2, -3, 524290, 2, 65533, 52
 
 [node name="GUI" parent="." instance=ExtResource("6_v76wr")]
 
-[connection signal="player_attack" from="Player" to="." method="_on_player_attack"]
-[connection signal="player_attack" from="Player" to="GUI" method="_on_player_attack"]
-[connection signal="player_hit" from="Player" to="GUI" method="_on_player_hit"]
+[connection signal="player_spawned" from="PlayersManager" to="." method="_on_players_manager_player_spawned"]
+[connection signal="timeout" from="EnemyManager/SpawnTimer" to="EnemyManager" method="_on_spawn_timer_timeout"]

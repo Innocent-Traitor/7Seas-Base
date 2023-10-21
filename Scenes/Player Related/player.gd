@@ -1,15 +1,15 @@
 extends Entity
 
-@export var PlayerCamera : Camera2D
+#@export var PlayerCamera : Camera2D
 
-#@onready var PlayerCamera : Camera2D = get_node("%PlayerCamera") I have no idea why this fucking broke
+@onready var PlayerCamera : Camera2D = get_node("%PlayerCamera")
 @onready var LeftCannon : Marker2D = get_node("%LeftCannon")
 @onready var RightCannon : Marker2D = get_node("%RightCannon")
+@onready var FrontCannon : Marker2D = get_node("%FrontCannon")
 
 signal player_attack(pos : Vector2, dir : Vector2, damage : int, attacker: String)
 signal player_hit(health : float)
 
-var doPhysics : bool= true
 ##### FUNCTIONS #####
 
 func _ready():
@@ -25,21 +25,28 @@ func _process(_delta):
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("LeftFire") and not onCooldown:
-		var direction = ((get_global_mouse_position() - position).normalized()).rotated(deg_to_rad(randf_range(-70, -80)))
-		player_attack.emit(LeftCannon.global_position, direction, damage, "Player")
+	if event.is_action_pressed("Fire") and not onCooldown:
+		print("Trying to fire cannonball")
+		var direction = ((get_global_mouse_position() - position).normalized()).rotated(deg_to_rad(randf_range(-5, 5)))
+		#fire_cannonball.emit(FrontCannon.global_position, direction, damage, "Player")
+		#attack(FrontCannon.global_position, direction, damage, "Player")
 		onCooldown = true
 		$CooldownTimer.start()
 
-	if event.is_action_pressed("RightFire") and not onCooldown:
-		var direction = ((get_global_mouse_position() - position).normalized()).rotated(deg_to_rad(randf_range(70, 80)))
-		player_attack.emit(RightCannon.global_position, direction, damage, "Player")
-		onCooldown = true
-		$CooldownTimer.start()
-	
-	if event.is_action_pressed("ui_accept"):
-		set_physics_process(doPhysics)
-		doPhysics = !doPhysics
+
+		# Maybe come back to this? Just with a small amount of testing,
+		# It doesn't seem very fun and difficult to use
+	# if event.is_action_pressed("LeftFire") and not onCooldown:
+	# 	var direction = ((get_global_mouse_position() - position).normalized()).rotated(deg_to_rad(randf_range(-70, -80)))
+	# 	player_attack.emit(LeftCannon.global_position, direction, damage, "Player")
+	# 	onCooldown = true
+	# 	$CooldownTimer.start()
+
+	# if event.is_action_pressed("RightFire") and not onCooldown:
+	# 	var direction = ((get_global_mouse_position() - position).normalized()).rotated(deg_to_rad(randf_range(70, 80)))
+	# 	player_attack.emit(RightCannon.global_position, direction, damage, "Player")
+	# 	onCooldown = true
+	# 	$CooldownTimer.start()
 
 func _physics_process(_delta: float) -> void:
 	var mousePos = get_global_mouse_position()
@@ -60,3 +67,6 @@ func _physics_process(_delta: float) -> void:
 
 func _on_cooldow_timer_timeout():
 	onCooldown = false
+
+func attack(pos : Vector2, dir : Vector2, dam : int, attacker: String) -> void:
+	super(pos, dir, dam, attacker)
