@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cukt37p7rqudn"]
 
-[ext_resource type="Script" path="res://Scenes/enemy.gd" id="1_hiwk1"]
+[ext_resource type="Script" path="res://Scenes/Non-Player/enemy.gd" id="1_a688m"]
 [ext_resource type="Texture2D" uid="uid://oj77ilhv6gw1" path="res://Sprites/enemy_ship.png" id="1_xy00c"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/finiteStateMachine.gd" id="3_4viwm"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemyFollowState.gd" id="4_omkgh"]
@@ -19,7 +19,7 @@ radius = 15.0333
 position = Vector2(-1, -2)
 collision_layer = 4
 collision_mask = 17
-script = ExtResource("1_hiwk1")
+script = ExtResource("1_a688m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -1.5708

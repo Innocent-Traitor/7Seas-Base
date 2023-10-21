@@ -28,7 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Fire") and not onCooldown:
 		print("Trying to fire cannonball")
 		var direction = ((get_global_mouse_position() - position).normalized()).rotated(deg_to_rad(randf_range(-5, 5)))
-		#fire_cannonball.emit(FrontCannon.global_position, direction, damage, "Player")
+		fire_cannonball.emit(FrontCannon.global_position, direction, damage, "Player")
 		#attack(FrontCannon.global_position, direction, damage, "Player")
 		onCooldown = true
 		$CooldownTimer.start()

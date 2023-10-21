@@ -2,10 +2,10 @@
 
 [ext_resource type="Shader" path="res://water.gdshader" id="1_ki02m"]
 [ext_resource type="Script" path="res://Scenes/game_manager.gd" id="1_qflio"]
-[ext_resource type="Script" path="res://Scenes/EnemyManager.gd" id="3_6wgev"]
-[ext_resource type="Script" path="res://Scenes/PlayersManager.gd" id="3_ac1f7"]
+[ext_resource type="Script" path="res://Scenes/Player Related/PlayersManager.gd" id="3_y1gph"]
 [ext_resource type="Texture2D" uid="uid://cfcnik0j82xtj" path="res://Tilesheets/tilesheet.png" id="4_bbvrl"]
-[ext_resource type="PackedScene" uid="uid://oq8ex8vsv1il" path="res://Scenes/gui.tscn" id="6_v76wr"]
+[ext_resource type="Script" path="res://Scenes/Non-Player/EnemyManager.gd" id="4_clm4p"]
+[ext_resource type="PackedScene" uid="uid://oq8ex8vsv1il" path="res://Scenes/GUI Related/gui.tscn" id="6_v76wr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ui55b"]
 shader = ExtResource("1_ki02m")
@@ -350,10 +350,10 @@ scale = Vector2(1479, 924)
 texture = SubResource("CanvasTexture_dkkdw")
 
 [node name="PlayersManager" type="Node2D" parent="."]
-script = ExtResource("3_ac1f7")
+script = ExtResource("3_y1gph")
 
 [node name="EnemyManager" type="Node2D" parent="."]
-script = ExtResource("3_6wgev")
+script = ExtResource("4_clm4p")
 
 [node name="SpawnTimer" type="Timer" parent="EnemyManager"]
 one_shot = true
