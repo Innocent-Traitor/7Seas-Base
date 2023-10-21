@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var EnemyBody : PackedScene = preload("res://Scenes/enemy.tscn")
+@onready var EnemyBody : PackedScene = preload("res://Scenes/Non-Player/enemy.tscn")
 
 
 

@@ -23,6 +23,7 @@ signal fire_cannonball(pos : Vector2, dir : Vector2, damage : int, attacker: Str
 
 func _ready() -> void:
 	connect("fire_cannonball", Callable(gameManager, "create_cannonball_attack"))
+	
 
 func _on_hitbox_body_entered(body : Node2D) -> void:
 	if body.is_in_group("Projectiles"):
@@ -39,6 +40,3 @@ func _on_hitbox_body_entered(body : Node2D) -> void:
 
 func _on_cooldown_timer_timeout() -> void:
 	onCooldown = false
-
-func attack(pos : Vector2, dir : Vector2, dam : int, attacker: String) -> void:
-	emit_signal("fire_cannonball", pos, dir, dam, attacker)

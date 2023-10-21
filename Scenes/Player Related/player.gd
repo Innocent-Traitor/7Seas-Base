@@ -14,6 +14,7 @@ signal player_hit(health : float)
 
 func _ready():
 	player_hit.emit(health)
+	connect("fire_cannonball", Callable(gameManager, "create_cannonball_attack"))
 
 func _process(_delta):
 	# Look towards the mouse and lerp it
@@ -67,6 +68,3 @@ func _physics_process(_delta: float) -> void:
 
 func _on_cooldow_timer_timeout():
 	onCooldown = false
-
-func attack(pos : Vector2, dir : Vector2, dam : int, attacker: String) -> void:
-	super(pos, dir, dam, attacker)

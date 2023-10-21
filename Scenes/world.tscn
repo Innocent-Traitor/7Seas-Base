@@ -343,7 +343,6 @@ sources/2 = SubResource("TileSetAtlasSource_yu5dp")
 script = ExtResource("1_qflio")
 
 [node name="WaterShader" type="Sprite2D" parent="."]
-visible = false
 material = SubResource("ShaderMaterial_ui55b")
 position = Vector2(584.5, 369)
 scale = Vector2(1479, 924)

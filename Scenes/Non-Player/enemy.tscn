@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://cukt37p7rqudn"]
 
-[ext_resource type="Script" path="res://Scenes/Non-Player/enemy.gd" id="1_a688m"]
-[ext_resource type="Texture2D" uid="uid://oj77ilhv6gw1" path="res://Sprites/enemy_ship.png" id="1_xy00c"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/finiteStateMachine.gd" id="3_4viwm"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/enemyFollowState.gd" id="4_omkgh"]
-[ext_resource type="PackedScene" uid="uid://bow1yro2qa0ye" path="res://Scenes/stateMachine/enemy_attack_state.tscn" id="5_4yj5d"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/EnemyRunState.gd" id="5_jka82"]
-[ext_resource type="PackedScene" uid="uid://csh4ota6s6kx7" path="res://Scenes/stateMachine/enemy_wander_state.tscn" id="5_pptia"]
+[ext_resource type="Script" path="res://Scenes/Non-Player/enemy.gd" id="1_31au8"]
+[ext_resource type="Texture2D" uid="uid://oj77ilhv6gw1" path="res://Sprites/enemy_ship.png" id="2_mvblk"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/finiteStateMachine.gd" id="3_bu6y7"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/enemyFollowState.gd" id="4_37uqu"]
+[ext_resource type="PackedScene" uid="uid://bow1yro2qa0ye" path="res://Scenes/stateMachine/enemy_attack_state.tscn" id="5_2qn7k"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/EnemyRunState.gd" id="6_ots3d"]
+[ext_resource type="PackedScene" uid="uid://csh4ota6s6kx7" path="res://Scenes/stateMachine/enemy_wander_state.tscn" id="7_1k73b"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sa0pc"]
 radius = 19.0
@@ -19,11 +19,11 @@ radius = 15.0333
 position = Vector2(-1, -2)
 collision_layer = 4
 collision_mask = 17
-script = ExtResource("1_a688m")
+script = ExtResource("1_31au8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -1.5708
-texture = ExtResource("1_xy00c")
+texture = ExtResource("2_mvblk")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 4
@@ -46,21 +46,21 @@ position = Vector2(56, 0)
 one_shot = true
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
-script = ExtResource("3_4viwm")
+script = ExtResource("3_bu6y7")
 state = NodePath("EnemyWanderState")
 
 [node name="EnemyFollowState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor")]
-script = ExtResource("4_omkgh")
+script = ExtResource("4_37uqu")
 actor = NodePath("../..")
 
-[node name="EnemyAttackState" parent="FiniteStateMachine" node_paths=PackedStringArray("actor") instance=ExtResource("5_4yj5d")]
+[node name="EnemyAttackState" parent="FiniteStateMachine" node_paths=PackedStringArray("actor") instance=ExtResource("5_2qn7k")]
 actor = NodePath("../..")
 
 [node name="EnemyRunState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor")]
-script = ExtResource("5_jka82")
+script = ExtResource("6_ots3d")
 actor = NodePath("../..")
 
-[node name="EnemyWanderState" parent="FiniteStateMachine" node_paths=PackedStringArray("actor") instance=ExtResource("5_pptia")]
+[node name="EnemyWanderState" parent="FiniteStateMachine" node_paths=PackedStringArray("actor") instance=ExtResource("7_1k73b")]
 actor = NodePath("../..")
 wanderRadius = 25.0
 
