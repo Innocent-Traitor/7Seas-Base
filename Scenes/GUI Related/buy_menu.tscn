@@ -1,0 +1,277 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfcaygqjahqvo"]
+
+[ext_resource type="Script" path="res://Scripts/GUI/buy_menu.gd" id="1_6nutq"]
+[ext_resource type="Texture2D" uid="uid://cyl1s4efh8fsw" path="res://Sprites/star_grayscale.png" id="2_2k6uk"]
+
+[sub_resource type="Shader" id="Shader_0glcq"]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = false;
+
+
+
+void fragment() {
+	if (grayscale){
+		COLOR.rgb = vec3(dot(COLOR.rgb, vec3(0.588, 0.294, 0)));
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2batc"]
+resource_local_to_scene = true
+shader = SubResource("Shader_0glcq")
+shader_parameter/grayscale = false
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_an2mn"]
+load_path = "res://.godot/imported/face_on_star.png-12c82e89b4a1f8a09ead98b9758499e1.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_veslt"]
+resource_local_to_scene = true
+
+[node name="BuyMenu" type="CanvasLayer"]
+script = ExtResource("1_6nutq")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 3
+
+[node name="LeftSide" type="VBoxContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Max Health" type="HBoxContainer" parent="GridContainer/LeftSide"]
+layout_mode = 2
+
+[node name="MaxHealthButton" type="Button" parent="GridContainer/LeftSide/Max Health"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Max Health"
+
+[node name="LVL0" type="TextureRect" parent="GridContainer/LeftSide/Max Health"]
+material = SubResource("ShaderMaterial_2batc")
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_an2mn")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL1" type="TextureRect" parent="GridContainer/LeftSide/Max Health"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL2" type="TextureRect" parent="GridContainer/LeftSide/Max Health"]
+material = SubResource("ShaderMaterial_veslt")
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL3" type="TextureRect" parent="GridContainer/LeftSide/Max Health"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL4" type="TextureRect" parent="GridContainer/LeftSide/Max Health"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Range" type="HBoxContainer" parent="GridContainer/LeftSide"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="GridContainer/LeftSide/Range"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Range"
+
+[node name="LVL1" type="TextureRect" parent="GridContainer/LeftSide/Range"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL2" type="TextureRect" parent="GridContainer/LeftSide/Range"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL3" type="TextureRect" parent="GridContainer/LeftSide/Range"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL4" type="TextureRect" parent="GridContainer/LeftSide/Range"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL5" type="TextureRect" parent="GridContainer/LeftSide/Range"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Damage" type="HBoxContainer" parent="GridContainer/LeftSide"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="GridContainer/LeftSide/Damage"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Damage
+"
+
+[node name="LVL1" type="TextureRect" parent="GridContainer/LeftSide/Damage"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL2" type="TextureRect" parent="GridContainer/LeftSide/Damage"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL3" type="TextureRect" parent="GridContainer/LeftSide/Damage"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL4" type="TextureRect" parent="GridContainer/LeftSide/Damage"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL5" type="TextureRect" parent="GridContainer/LeftSide/Damage"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="VSeparator" type="VSeparator" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Right Side" type="VBoxContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Ship Speed" type="HBoxContainer" parent="GridContainer/Right Side"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="GridContainer/Right Side/Ship Speed"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Ship Speed
+"
+
+[node name="LVL1" type="TextureRect" parent="GridContainer/Right Side/Ship Speed"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL2" type="TextureRect" parent="GridContainer/Right Side/Ship Speed"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL3" type="TextureRect" parent="GridContainer/Right Side/Ship Speed"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL4" type="TextureRect" parent="GridContainer/Right Side/Ship Speed"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL5" type="TextureRect" parent="GridContainer/Right Side/Ship Speed"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Firing Speed" type="HBoxContainer" parent="GridContainer/Right Side"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="GridContainer/Right Side/Firing Speed"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Firing Speed
+"
+
+[node name="LVL1" type="TextureRect" parent="GridContainer/Right Side/Firing Speed"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL2" type="TextureRect" parent="GridContainer/Right Side/Firing Speed"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL3" type="TextureRect" parent="GridContainer/Right Side/Firing Speed"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL4" type="TextureRect" parent="GridContainer/Right Side/Firing Speed"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL5" type="TextureRect" parent="GridContainer/Right Side/Firing Speed"]
+layout_mode = 2
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Cannons" type="HBoxContainer" parent="GridContainer/Right Side"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="GridContainer/Right Side/Cannons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Cannons
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GridContainer/Right Side/Cannons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LVL1" type="TextureRect" parent="GridContainer/Right Side/Cannons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL2" type="TextureRect" parent="GridContainer/Right Side/Cannons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="LVL3" type="TextureRect" parent="GridContainer/Right Side/Cannons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
+
+[connection signal="pressed" from="GridContainer/LeftSide/Max Health/MaxHealthButton" to="." method="_on_max_health_button_pressed"]

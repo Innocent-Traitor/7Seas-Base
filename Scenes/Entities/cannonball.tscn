@@ -1,17 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://cperfvppfc1t6"]
 
-[ext_resource type="Script" path="res://Scenes/Player Related/cannonball.gd" id="1_5hki7"]
-[ext_resource type="Texture2D" uid="uid://bf868oikuctqx" path="res://Sprites/cannonBall.png" id="1_7vh87"]
+[ext_resource type="Script" path="res://Scripts/Global/cannonball.gd" id="1_k0du5"]
+[ext_resource type="Texture2D" uid="uid://bf868oikuctqx" path="res://Sprites/cannonBall.png" id="2_kx4ug"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jlb3h"]
 radius = 11.0
 
 [node name="Cannonball" type="RigidBody2D" groups=["Projectiles"]]
-collision_layer = 2
+collision_layer = 8
 collision_mask = 4
 gravity_scale = 0.0
 linear_damp = 0.5
-script = ExtResource("1_5hki7")
+script = ExtResource("1_k0du5")
 speed = 500
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -19,4 +19,4 @@ shape = SubResource("CircleShape2D_jlb3h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
-texture = ExtResource("1_7vh87")
+texture = ExtResource("2_kx4ug")

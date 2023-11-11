@@ -7,6 +7,12 @@ extends Entity
 @onready var RightCannon : Marker2D = get_node("%RightCannon")
 @onready var FrontCannon : Marker2D = get_node("%FrontCannon")
 
+@onready var gui = get_tree().get_first_node_in_group("gui")
+@onready var buyMenu = get_tree().get_first_node_in_group("buyMenu")
+
+var shopping  : bool = false
+
+## I don't believe this signal is used anymore? Should've been replaced with "fire_cannonball" in the entity class
 signal player_attack(pos : Vector2, dir : Vector2, damage : int, attacker: String)
 signal player_hit(health : float)
 
@@ -15,6 +21,8 @@ signal player_hit(health : float)
 func _ready():
 	player_hit.emit(health)
 	connect("fire_cannonball", Callable(gameManager, "create_cannonball_attack"))
+	connect("fire_cannonball", Callable(gui, "_on_player_attack"))
+	connect("player_hit", Callable(gui, "_on_player_hit"))
 
 func _process(_delta):
 	# Look towards the mouse and lerp it
@@ -34,6 +42,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		onCooldown = true
 		$CooldownTimer.start()
 
+	if event.is_action_pressed("Buy"):
+		if shopping:
+			buyMenu.visible = false
+			shopping = false
+		else:
+			buyMenu.visible = true
+			shopping = true
+	
+	if event.is_action_pressed("Print"):
+		print(healthMax)
 
 		# Maybe come back to this? Just with a small amount of testing,
 		# It doesn't seem very fun and difficult to use
@@ -68,3 +86,9 @@ func _physics_process(_delta: float) -> void:
 
 func _on_cooldow_timer_timeout():
 	onCooldown = false
+
+func handle_upgrade_purchase(upgrade : String, level : int) -> void:
+	match upgrade:
+		"Max Health":
+			healthMaxLVL = level
+	update_stats()

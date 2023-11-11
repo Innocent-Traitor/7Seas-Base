@@ -3,7 +3,8 @@ extends State
 
 @export var actor : Entity
 
-@onready var player = get_tree().get_first_node_in_group("player")
+var target : Object
+var target_list : Array = []
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -21,19 +22,25 @@ func _exit_state() -> void:
 
 
 func _process(_delta) -> void:
-	var playerPos = player.global_position
-	var lookAngle = (playerPos - actor.global_position).angle()
+	if target == null:
+		return
+
+	var targetPos = target.global_position
+	var lookAngle = (targetPos - actor.global_position).angle()
 	actor.rotation = lerp_angle(actor.rotation, lookAngle, 0.05)
 
 	if not actor.onCooldown:
-		#actor.attack()
+		actor.attack(target)
 		actor.onCooldown = true
+		$CooldownTimer.start()
 
 	
 	
 func _physics_process(_delta : float) -> void:
-	var playerPos = player.global_position
-	var direction = (playerPos - actor.global_position).normalized()
+	if target == null:
+		return
+	var targetPos = target.global_position
+	var direction = (targetPos - actor.global_position).normalized()
 	actor.velocity = (direction * actor.speed * actor.addedSpeed)
 	actor.move_and_slide()
 
@@ -42,3 +49,25 @@ func _physics_process(_delta : float) -> void:
 
 func _on_cooldown_timer_timeout() -> void:
 	actor.onCooldown = false
+
+
+func _on_target_timer_timeout() -> void:
+	target = find_target()
+	if target == null:
+		$TargetTimer.start()
+
+
+func _on_vision_body_exited(body : Node2D) -> void:
+	if target_list.has(body):
+		target_list.erase(body)
+
+
+func _on_vision_body_entered(body : Node2D) -> void:
+	if not target_list.has(body):
+		target_list.append(body)
+
+func find_target() -> Object:
+	if target_list.size() > 0:
+		return target_list.pick_random()
+	else:
+		return null

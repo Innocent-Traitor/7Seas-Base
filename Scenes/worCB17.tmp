@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Global/game_manager.gd" id="1_a6ryt"]
 [ext_resource type="Script" path="res://Scripts/Entities/PlayersManager.gd" id="2_nbdv0"]
-[ext_resource type="Script" path="res://Scripts/Entities/EnemyManager.gd" id="3_sd12j"]
+[ext_resource type="Script" path="res://Scenes/Entities/EnemyManager.gd" id="3_sd12j"]
 [ext_resource type="Texture2D" uid="uid://cfcnik0j82xtj" path="res://Tilesheets/tilesheet.png" id="4_bbvrl"]
 [ext_resource type="PackedScene" uid="uid://bfcaygqjahqvo" path="res://Scenes/GUI Related/buy_menu.tscn" id="6_lx46s"]
 [ext_resource type="PackedScene" uid="uid://oq8ex8vsv1il" path="res://Scenes/GUI Related/gui.tscn" id="6_v76wr"]
@@ -515,8 +515,8 @@ layer_0/tile_data = PackedInt32Array(-65539, 196610, 2, -3, 524290, 2, 65533, 52
 
 [node name="GUI" parent="." groups=["gui"] instance=ExtResource("6_v76wr")]
 
-[node name="BuyMenu" parent="." groups=["buyMenu"] instance=ExtResource("6_lx46s")]
-visible = false
+[node name="BuyMenu" parent="." instance=ExtResource("6_lx46s")]
+follow_viewport_enabled = true
 
 [connection signal="player_spawned" from="PlayersManager" to="." method="_on_players_manager_player_spawned"]
 [connection signal="timeout" from="EnemyManager/SpawnTimer" to="EnemyManager" method="_on_spawn_timer_timeout"]

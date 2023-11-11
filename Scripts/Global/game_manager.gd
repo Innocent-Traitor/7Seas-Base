@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var CannonBall : PackedScene = preload("res://Scenes/Player Related/cannonball.tscn")
+@onready var CannonBall : PackedScene = preload("res://Scenes/Entities/cannonball.tscn") ## entities/cannonball.tscn
 
 
 ## I imagine when making this into Multiplayer, I'll have to

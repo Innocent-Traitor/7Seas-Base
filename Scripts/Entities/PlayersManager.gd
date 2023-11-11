@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var PlayerBody : PackedScene = preload("res://Scenes/Player Related/player.tscn")
+@onready var PlayerBody : PackedScene = preload("res://Scenes/Entities/player.tscn") ## entities/player.tscn
 
 signal player_spawned(node)
 

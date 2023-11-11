@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bugglxem35004"]
 
-[ext_resource type="Texture2D" uid="uid://npli7g0d6l5h" path="res://Sprites/player_ship.png" id="1_7137d"]
-[ext_resource type="Script" path="res://Scenes/Player Related/player.gd" id="1_ukl4a"]
+[ext_resource type="Script" path="res://Scripts/Entities/player.gd" id="1_13jka"]
+[ext_resource type="Texture2D" uid="uid://npli7g0d6l5h" path="res://Sprites/player_ship.png" id="2_5e2ls"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sa0pc"]
 radius = 19.0
@@ -10,13 +10,13 @@ height = 104.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ay1cu"]
 radius = 15.0333
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 28
-script = ExtResource("1_ukl4a")
+script = ExtResource("1_13jka")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -1.5708
-texture = ExtResource("1_7137d")
+texture = ExtResource("2_5e2ls")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_mask = 12
