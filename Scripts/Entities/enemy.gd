@@ -8,7 +8,7 @@ func _ready() -> void:
 
 func attack(target : Object) -> void:
 	var direction = ((target.global_position - position).normalized()).rotated(deg_to_rad(randf_range(-5, 5)))
-	fire_cannonball.emit($Marker2D.global_position, direction, damage, "Enemy")
+	fire_cannonball.emit($Marker2D.global_position, direction, attackRange, damage, "Enemy")
 
 
 # Wandering - Wanders around, not firing and just moving around the map

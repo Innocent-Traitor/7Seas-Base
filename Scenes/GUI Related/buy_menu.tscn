@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfcaygqjahqvo"]
+[gd_scene load_steps=8 format=3 uid="uid://bfcaygqjahqvo"]
 
 [ext_resource type="Script" path="res://Scripts/GUI/buy_menu.gd" id="1_6nutq"]
 [ext_resource type="Texture2D" uid="uid://cyl1s4efh8fsw" path="res://Sprites/star_grayscale.png" id="2_2k6uk"]
+[ext_resource type="Texture2D" uid="uid://c75yhd4exew8j" path="res://Sprites/star_gold.png" id="3_h5qvq"]
 
 [sub_resource type="Shader" id="Shader_0glcq"]
 code = "shader_type canvas_item;
@@ -30,6 +31,7 @@ resource_local_to_scene = true
 
 [node name="BuyMenu" type="CanvasLayer"]
 script = ExtResource("1_6nutq")
+goldStar = ExtResource("3_h5qvq")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_right = 40.0
@@ -82,10 +84,16 @@ stretch_mode = 4
 [node name="Range" type="HBoxContainer" parent="GridContainer/LeftSide"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="GridContainer/LeftSide/Range"]
+[node name="RangeButton" type="Button" parent="GridContainer/LeftSide/Range"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Range"
+
+[node name="LVL0" type="TextureRect" parent="GridContainer/LeftSide/Range"]
+layout_mode = 2
+texture = ExtResource("3_h5qvq")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="LVL1" type="TextureRect" parent="GridContainer/LeftSide/Range"]
 layout_mode = 2
@@ -111,20 +119,20 @@ texture = ExtResource("2_2k6uk")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="LVL5" type="TextureRect" parent="GridContainer/LeftSide/Range"]
-layout_mode = 2
-texture = ExtResource("2_2k6uk")
-expand_mode = 2
-stretch_mode = 4
-
 [node name="Damage" type="HBoxContainer" parent="GridContainer/LeftSide"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="GridContainer/LeftSide/Damage"]
+[node name="DamageButton" type="Button" parent="GridContainer/LeftSide/Damage"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Damage
 "
+
+[node name="LVL0" type="TextureRect" parent="GridContainer/LeftSide/Damage"]
+layout_mode = 2
+texture = ExtResource("3_h5qvq")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="LVL1" type="TextureRect" parent="GridContainer/LeftSide/Damage"]
 layout_mode = 2
@@ -145,12 +153,6 @@ expand_mode = 2
 stretch_mode = 4
 
 [node name="LVL4" type="TextureRect" parent="GridContainer/LeftSide/Damage"]
-layout_mode = 2
-texture = ExtResource("2_2k6uk")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="LVL5" type="TextureRect" parent="GridContainer/LeftSide/Damage"]
 layout_mode = 2
 texture = ExtResource("2_2k6uk")
 expand_mode = 2
@@ -275,3 +277,5 @@ expand_mode = 2
 stretch_mode = 4
 
 [connection signal="pressed" from="GridContainer/LeftSide/Max Health/MaxHealthButton" to="." method="_on_max_health_button_pressed"]
+[connection signal="pressed" from="GridContainer/LeftSide/Range/RangeButton" to="." method="_on_range_button_pressed"]
+[connection signal="pressed" from="GridContainer/LeftSide/Damage/DamageButton" to="." method="_on_damage_button_pressed"]

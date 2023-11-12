@@ -13,23 +13,26 @@ var health : float = 100
 
 # Upgrade Levels
 var healthMaxLVL : int = 0 		## 100, 200, 300, 400, 500   | Max Health
-var attackRangeLVL : int = 0 	## 5, 4, 3, 2, 1             | Lower = More Range
+var attackRangeLVL : int = 0 	## 1, 1.1, 1.2, 1.3, 1.4     | Multipled to the cannonball tween interval
 var damageLVL : int = 0			## 1, 2, 3, 4, 5             | Each one does +10 damage
 var addedSpeedLVL : int = 0		## 1, 1.1, 1.2, 1.3, 1.4     | Each one moves the ship 10% faster
+var firingSpeedLVL : float = 0  ## 1, 0.95, 0.9, 0.85, 0.8   | How much the firing cooldown is multipled by
 var cannonsLVL : int = 0		## 1, 2, 3                   | How many cannons the ship has
 
 # Upgrades 
 var healthMax : int = UpgradesDb.UPGRADES["maxHealth"][healthMaxLVL]
 var attackRange : int = UpgradesDb.UPGRADES["attackRange"][attackRangeLVL]  
 var damage : int = UpgradesDb.UPGRADES["damage"][damageLVL]     
-var addedSpeed : float = UpgradesDb.UPGRADES["addedSpeed"][addedSpeedLVL]  
+var addedSpeed : float = UpgradesDb.UPGRADES["addedSpeed"][addedSpeedLVL]
+var firingSpeed : float = UpgradesDb.UPGRADES["firingSpeed"][firingSpeedLVL]    
 var cannons : int = UpgradesDb.UPGRADES["cannons"][cannonsLVL]       
 
 
-signal fire_cannonball(pos : Vector2, dir : Vector2, damage : int, attacker: String)
+signal fire_cannonball(pos : Vector2, dir : Vector2, range : float, damage : int, attacker: String)
 
 func _ready() -> void:
 	connect("fire_cannonball", Callable(gameManager, "create_cannonball_attack"))
+	$CooldownTimer.wait_time = firingSpeed
 	
 
 func _on_hitbox_body_entered(body : Node2D) -> void:

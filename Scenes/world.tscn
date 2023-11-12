@@ -516,7 +516,6 @@ layer_0/tile_data = PackedInt32Array(-65539, 196610, 2, -3, 524290, 2, 65533, 52
 [node name="GUI" parent="." groups=["gui"] instance=ExtResource("6_v76wr")]
 
 [node name="BuyMenu" parent="." groups=["buyMenu"] instance=ExtResource("6_lx46s")]
-visible = false
 
 [connection signal="player_spawned" from="PlayersManager" to="." method="_on_players_manager_player_spawned"]
 [connection signal="timeout" from="EnemyManager/SpawnTimer" to="EnemyManager" method="_on_spawn_timer_timeout"]

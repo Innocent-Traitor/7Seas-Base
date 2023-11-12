@@ -11,9 +11,10 @@ extends Entity
 @onready var buyMenu = get_tree().get_first_node_in_group("buyMenu")
 
 var shopping  : bool = false
+var coins : int = 30
 
 ## I don't believe this signal is used anymore? Should've been replaced with "fire_cannonball" in the entity class
-signal player_attack(pos : Vector2, dir : Vector2, damage : int, attacker: String)
+signal player_attack(pos : Vector2, dir : Vector2, range : float, damage : int, attacker: String)
 signal player_hit(health : float)
 
 ##### FUNCTIONS #####
@@ -36,8 +37,9 @@ func _process(_delta):
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Fire") and not onCooldown:
 		print("Trying to fire cannonball")
-		var direction = ((get_global_mouse_position() - position).normalized()).rotated(deg_to_rad(randf_range(-5, 5)))
-		fire_cannonball.emit(FrontCannon.global_position, direction, damage, "Player")
+		var firingForce = (get_global_mouse_position() - position) * attackRange
+		var direction = firingForce.normalized().rotated(deg_to_rad(randf_range(-5, 5)))
+		fire_cannonball.emit(FrontCannon.global_position, direction, attackRange, damage, "Player")
 		#attack(FrontCannon.global_position, direction, damage, "Player")
 		onCooldown = true
 		$CooldownTimer.start()
@@ -52,6 +54,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("Print"):
 		print(healthMax)
+		print(attackRange)
 
 		# Maybe come back to this? Just with a small amount of testing,
 		# It doesn't seem very fun and difficult to use
@@ -88,7 +91,31 @@ func _on_cooldow_timer_timeout():
 	onCooldown = false
 
 func handle_upgrade_purchase(upgrade : String, level : int) -> void:
-	match upgrade:
-		"Max Health":
-			healthMaxLVL = level
-	update_stats()
+	if can_purchase(upgrade):
+		match upgrade:
+			"Max Health":
+				healthMaxLVL = level
+				coins -= 10
+			"Range":
+				attackRangeLVL = level
+				coins -= 10
+			"Damage":
+				damageLVL = level
+				coins -= 10
+		
+
+		update_stats()
+
+func can_purchase(upgrade) -> bool:
+	if upgrade == "cannons":
+		if coins <= 30:
+			return false
+		else:
+			return true
+	else:
+		if coins <= 10:
+			return false
+		else:
+			return true
+	
+	

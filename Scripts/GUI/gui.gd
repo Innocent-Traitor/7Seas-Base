@@ -21,7 +21,7 @@ func _on_player_hit(value : float) -> void:
 	update_player_health(value)
 
 
-func _on_player_attack(_a, _b, _c, _d) -> void:
+func _on_player_attack(_a, _b, _c, _d, _e) -> void:
 	CooldownBar.scale.x = 0.3
 	var tween = create_tween()
 	tween.tween_property(CooldownBar, "scale", Vector2(0.0, 0.15), 1)
