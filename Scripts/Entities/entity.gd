@@ -14,7 +14,7 @@ var health : float = 100
 # Upgrade Levels
 var healthMaxLVL : int = 0 		## 100, 200, 300, 400, 500   | Max Health
 var attackRangeLVL : int = 0 	## 1, 1.1, 1.2, 1.3, 1.4     | Multipled to the cannonball tween interval
-var damageLVL : int = 0			## 1, 2, 3, 4, 5             | Each one does +10 damage
+var damageLVL : int = 0			## 10, 15, 20, 25, 30        | Each one does +10 damage
 var addedSpeedLVL : int = 0		## 1, 1.1, 1.2, 1.3, 1.4     | Each one moves the ship 10% faster
 var firingSpeedLVL : float = 0  ## 1, 0.95, 0.9, 0.85, 0.8   | How much the firing cooldown is multipled by
 var cannonsLVL : int = 0		## 1, 2, 3                   | How many cannons the ship has

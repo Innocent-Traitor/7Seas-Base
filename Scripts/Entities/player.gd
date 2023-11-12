@@ -55,6 +55,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Print"):
 		print(healthMax)
 		print(attackRange)
+		print(damage)
+		print(addedSpeed)
+		print(firingSpeed)
+		print(cannons)
 
 		# Maybe come back to this? Just with a small amount of testing,
 		# It doesn't seem very fun and difficult to use
