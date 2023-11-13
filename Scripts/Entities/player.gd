@@ -10,20 +10,20 @@ extends Entity
 @onready var gui = get_tree().get_first_node_in_group("gui")
 @onready var buyMenu = get_tree().get_first_node_in_group("buyMenu")
 
-var shopping  : bool = false
-var coins : int = 30
+var shopping  : bool = false ## Is the player shopping?
+var coins : int = 99999999 ## How many coins does the player have?
 
 ## I don't believe this signal is used anymore? Should've been replaced with "fire_cannonball" in the entity class
 signal player_attack(pos : Vector2, dir : Vector2, range : float, damage : int, attacker: String)
-signal player_hit(health : float)
+signal player_hit(health : float) ## Used to communicate to the GUI to show proper health
 
 ##### FUNCTIONS #####
 
 func _ready():
-	player_hit.emit(health)
 	connect("fire_cannonball", Callable(gameManager, "create_cannonball_attack"))
 	connect("fire_cannonball", Callable(gui, "_on_player_attack"))
 	connect("player_hit", Callable(gui, "_on_player_hit"))
+	player_hit.emit(health)
 
 func _process(_delta):
 	# Look towards the mouse and lerp it
@@ -36,13 +36,7 @@ func _process(_delta):
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Fire") and not onCooldown:
-		print("Trying to fire cannonball")
-		var firingForce = (get_global_mouse_position() - position) * attackRange
-		var direction = firingForce.normalized().rotated(deg_to_rad(randf_range(-5, 5)))
-		fire_cannonball.emit(FrontCannon.global_position, direction, attackRange, damage, "Player")
-		#attack(FrontCannon.global_position, direction, damage, "Player")
-		onCooldown = true
-		$CooldownTimer.start()
+		handle_cannon_fire()
 
 	if event.is_action_pressed("Buy"):
 		if shopping:
@@ -106,10 +100,21 @@ func handle_upgrade_purchase(upgrade : String, level : int) -> void:
 			"Damage":
 				damageLVL = level
 				coins -= 10
+			"Ship Speed":
+				addedSpeedLVL = level
+				coins -= 10
+			"Firing Speed":
+				firingSpeedLVL = level
+				coins -= 10
+			"Cannon":
+				cannonsLVL = level
+				coins -= 30
 		
 
 		update_stats()
 
+## Checks to make sure they have coins to buy the upgrade
+## Cannons = 30, all other upgrades = 10
 func can_purchase(upgrade) -> bool:
 	if upgrade == "cannons":
 		if coins <= 30:
@@ -121,5 +126,25 @@ func can_purchase(upgrade) -> bool:
 			return false
 		else:
 			return true
+
+## Handle cannon firing logic
+func handle_cannon_fire() -> void:
+	# Get firing force and direction
+	var firingForce = (get_global_mouse_position() - position) * attackRange
+	var direction = firingForce.normalized().rotated(deg_to_rad(randf_range(-5, 5)))
+
+	# Fire the first cannon ball, and see if we can fire the other two
+	fire_cannonball.emit(FrontCannon.global_position, direction, attackRange, damage, "Player")
+
+	if cannons >= 2:
+		var leftDir = direction.rotated(deg_to_rad(randf_range(-30, -20)))
+		fire_cannonball.emit(FrontCannon.global_position, leftDir, attackRange, damage, "Player")
+	
+	if cannons == 3:
+		var rightDir = direction.rotated(deg_to_rad(randf_range(30, 20)))
+		fire_cannonball.emit(FrontCannon.global_position, rightDir, attackRange, damage, "Player")
+
+	onCooldown = true
+	$CooldownTimer.start()
 	
 	

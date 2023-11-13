@@ -8,6 +8,9 @@ extends CanvasLayer
 var healthLVL = 0
 var rangeLVL = 0
 var damageLVL = 0
+var shipSpeedLVL = 0
+var firingSpeedLVL = 0
+var cannonsLVL = 0
 
 
 signal purchase(upgrade : String, level : int)
@@ -36,4 +39,29 @@ func _on_damage_button_pressed() -> void:
 		damageLVL += 1
 		purchase.emit("Damage", damageLVL)
 		var text = ("GridContainer/LeftSide/Damage/LVL" + str(damageLVL))
+		get_node(text).texture = goldStar
+
+
+func _on_ship_speed_button_pressed() -> void:
+	if shipSpeedLVL < 4 and player.can_purchase("ship"):
+		shipSpeedLVL += 1
+		purchase.emit("Ship Speed", shipSpeedLVL)
+		var text = ("GridContainer/Right Side/Ship Speed/LVL" + str(shipSpeedLVL))
+		get_node(text).texture = goldStar
+
+
+func _on_firing_speed_button_pressed() -> void:
+	if firingSpeedLVL < 4 and player.can_purchase("firing"):
+		firingSpeedLVL += 1
+		purchase.emit("Firing Speed", firingSpeedLVL)
+		var text = ("GridContainer/Right Side/Firing Speed/LVL" + str(firingSpeedLVL))
+		get_node(text).texture = goldStar
+
+
+
+func _on_cannon_button_pressed() -> void:
+	if cannonsLVL < 4 and player.can_purchase("cannons"):
+		cannonsLVL += 1
+		purchase.emit("Cannon", cannonsLVL)
+		var text = ("GridContainer/Right Side/Cannons/HBoxContainer/LVL" + str(cannonsLVL))
 		get_node(text).texture = goldStar

@@ -167,11 +167,17 @@ layout_mode = 2
 [node name="Ship Speed" type="HBoxContainer" parent="GridContainer/Right Side"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="GridContainer/Right Side/Ship Speed"]
+[node name="ShipSpeedButton" type="Button" parent="GridContainer/Right Side/Ship Speed"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Ship Speed
 "
+
+[node name="LVL0" type="TextureRect" parent="GridContainer/Right Side/Ship Speed"]
+layout_mode = 2
+texture = ExtResource("3_h5qvq")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="LVL1" type="TextureRect" parent="GridContainer/Right Side/Ship Speed"]
 layout_mode = 2
@@ -197,20 +203,20 @@ texture = ExtResource("2_2k6uk")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="LVL5" type="TextureRect" parent="GridContainer/Right Side/Ship Speed"]
-layout_mode = 2
-texture = ExtResource("2_2k6uk")
-expand_mode = 2
-stretch_mode = 4
-
 [node name="Firing Speed" type="HBoxContainer" parent="GridContainer/Right Side"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="GridContainer/Right Side/Firing Speed"]
+[node name="FiringSpeedButton" type="Button" parent="GridContainer/Right Side/Firing Speed"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Firing Speed
 "
+
+[node name="LVL0" type="TextureRect" parent="GridContainer/Right Side/Firing Speed"]
+layout_mode = 2
+texture = ExtResource("3_h5qvq")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="LVL1" type="TextureRect" parent="GridContainer/Right Side/Firing Speed"]
 layout_mode = 2
@@ -236,16 +242,10 @@ texture = ExtResource("2_2k6uk")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="LVL5" type="TextureRect" parent="GridContainer/Right Side/Firing Speed"]
-layout_mode = 2
-texture = ExtResource("2_2k6uk")
-expand_mode = 2
-stretch_mode = 4
-
 [node name="Cannons" type="HBoxContainer" parent="GridContainer/Right Side"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="GridContainer/Right Side/Cannons"]
+[node name="CannonButton" type="Button" parent="GridContainer/Right Side/Cannons"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Cannons
@@ -254,6 +254,13 @@ text = "Cannons
 [node name="HBoxContainer" type="HBoxContainer" parent="GridContainer/Right Side/Cannons"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="LVL0" type="TextureRect" parent="GridContainer/Right Side/Cannons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("2_2k6uk")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="LVL1" type="TextureRect" parent="GridContainer/Right Side/Cannons/HBoxContainer"]
 layout_mode = 2
@@ -269,13 +276,9 @@ texture = ExtResource("2_2k6uk")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="LVL3" type="TextureRect" parent="GridContainer/Right Side/Cannons/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-texture = ExtResource("2_2k6uk")
-expand_mode = 2
-stretch_mode = 4
-
 [connection signal="pressed" from="GridContainer/LeftSide/Max Health/MaxHealthButton" to="." method="_on_max_health_button_pressed"]
 [connection signal="pressed" from="GridContainer/LeftSide/Range/RangeButton" to="." method="_on_range_button_pressed"]
 [connection signal="pressed" from="GridContainer/LeftSide/Damage/DamageButton" to="." method="_on_damage_button_pressed"]
+[connection signal="pressed" from="GridContainer/Right Side/Ship Speed/ShipSpeedButton" to="." method="_on_ship_speed_button_pressed"]
+[connection signal="pressed" from="GridContainer/Right Side/Firing Speed/FiringSpeedButton" to="." method="_on_firing_speed_button_pressed"]
+[connection signal="pressed" from="GridContainer/Right Side/Cannons/CannonButton" to="." method="_on_cannon_button_pressed"]
