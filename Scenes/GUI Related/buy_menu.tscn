@@ -258,7 +258,7 @@ size_flags_horizontal = 3
 [node name="LVL0" type="TextureRect" parent="GridContainer/Right Side/Cannons/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
-texture = ExtResource("2_2k6uk")
+texture = ExtResource("3_h5qvq")
 expand_mode = 2
 stretch_mode = 4
 

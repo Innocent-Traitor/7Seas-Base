@@ -14,5 +14,7 @@ func attack(target : Object) -> void:
 # Wandering - Wanders around, not firing and just moving around the map
 # Running - Actively runs away from other ships
 # Attacking - Will attack other ships
+# Follow - Follows the player
+# Lobo - Does not move the enemy
 
 

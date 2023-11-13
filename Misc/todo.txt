@@ -1,0 +1,11 @@
+I'm making really good progress on my project, 
+I just gotta do some tweaking to my enemy management, 
+improve the AI, 
+make the UI look good, 
+and QoL polish. 
+Once I get it into a playable state I'm happy with, 
+I can release it out in the wild, 
+get multiplayer working and send that out afterward
+
+Next thing to do:
+Main menu and settings

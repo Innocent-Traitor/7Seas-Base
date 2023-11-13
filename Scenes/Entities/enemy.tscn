@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cukt37p7rqudn"]
+[gd_scene load_steps=12 format=3 uid="uid://cukt37p7rqudn"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/enemy.gd" id="1_26oed"]
 [ext_resource type="Texture2D" uid="uid://oj77ilhv6gw1" path="res://Sprites/enemy_ship.png" id="2_gby0s"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bow1yro2qa0ye" path="res://Scenes/stateMachine/enemy_attack_state.tscn" id="5_eg430"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/EnemyRunState.gd" id="6_l8clo"]
 [ext_resource type="PackedScene" uid="uid://csh4ota6s6kx7" path="res://Scenes/stateMachine/enemy_wander_state.tscn" id="7_56wl2"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/EnemyLoboState.gd" id="8_pfkhy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nlsvi"]
 radius = 671.001
@@ -56,7 +57,7 @@ one_shot = true
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("3_1erwx")
-state = NodePath("EnemyAttackState")
+state = NodePath("EnemyLoboState")
 
 [node name="EnemyFollowState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor")]
 script = ExtResource("4_n017j")
@@ -72,6 +73,10 @@ actor = NodePath("../..")
 [node name="EnemyWanderState" parent="FiniteStateMachine" node_paths=PackedStringArray("actor") instance=ExtResource("7_56wl2")]
 actor = NodePath("../..")
 wanderRadius = 25.0
+
+[node name="EnemyLoboState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("actor")]
+script = ExtResource("8_pfkhy")
+actor = NodePath("../..")
 
 [connection signal="body_entered" from="Vision" to="FiniteStateMachine/EnemyAttackState" method="_on_vision_body_entered"]
 [connection signal="body_exited" from="Vision" to="FiniteStateMachine/EnemyAttackState" method="_on_vision_body_exited"]
