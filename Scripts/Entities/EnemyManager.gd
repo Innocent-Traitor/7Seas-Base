@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var EnemyBody : PackedScene = preload("res://Scenes/Entities/enemy.tscn") 
 
-
+var enemyIDIncrementer : int = 1000
 
 func _on_spawn_timer_timeout() -> void:
 	for i in 10:
@@ -18,6 +18,8 @@ func _on_spawn_timer_timeout() -> void:
 		newEnemy.addedSpeedLVL = stats[3]
 		newEnemy.firingSpeedLVL = stats[4]
 		newEnemy.cannonsLVL = stats[5]
+		newEnemy.entityID = randi_range(1000, 9999)
+		newEnemy.entityName = GlobalNetworked.BOT_NAMES.pick_random()
 
 		add_child(newEnemy)
 		print("New Enemy Placed at: " + str(xPos) + str(yPos))

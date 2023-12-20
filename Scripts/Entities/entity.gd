@@ -10,6 +10,8 @@ class_name Entity
 # Base Variables
 var onCooldown : bool = false
 var health : float = 100
+var entityName : String = "Unknown"
+var entityID : int = 0000_0000
 
 # Upgrade Levels
 var healthMaxLVL : int = 0 		## 100, 200, 300, 400, 500   | Max Health

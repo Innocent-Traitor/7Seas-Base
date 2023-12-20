@@ -19,7 +19,7 @@ func create_cannonball_attack(pos : Vector2, dir : Vector2, attackRange : float,
 	cannonballAttack.position = pos
 	cannonballAttack.direction = dir
 	cannonballAttack.attackRange = attackRange
-	cannonballAttack.damage = damage * 10
+	cannonballAttack.damage = damage
 	cannonballAttack.attacker = attacker
 	print("Created Cannonball")
 	

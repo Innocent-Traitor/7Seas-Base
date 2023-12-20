@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfcaygqjahqvo"]
+[gd_scene load_steps=9 format=3 uid="uid://bfcaygqjahqvo"]
 
 [ext_resource type="Script" path="res://Scripts/GUI/buy_menu.gd" id="1_6nutq"]
 [ext_resource type="Texture2D" uid="uid://cyl1s4efh8fsw" path="res://Sprites/star_grayscale.png" id="2_2k6uk"]
 [ext_resource type="Texture2D" uid="uid://c75yhd4exew8j" path="res://Sprites/star_gold.png" id="3_h5qvq"]
+[ext_resource type="Texture2D" uid="uid://bcw7y8xsvpncj" path="res://Sprites/signboard.png" id="4_jogca"]
 
 [sub_resource type="Shader" id="Shader_0glcq"]
 code = "shader_type canvas_item;
@@ -275,6 +276,22 @@ size_flags_horizontal = 6
 texture = ExtResource("2_2k6uk")
 expand_mode = 2
 stretch_mode = 4
+
+[node name="Signboard" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -666.5
+offset_top = -577.0
+offset_right = 666.5
+offset_bottom = 423.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset = Vector2(666, 500)
+texture = ExtResource("4_jogca")
 
 [connection signal="pressed" from="GridContainer/LeftSide/Max Health/MaxHealthButton" to="." method="_on_max_health_button_pressed"]
 [connection signal="pressed" from="GridContainer/LeftSide/Range/RangeButton" to="." method="_on_range_button_pressed"]

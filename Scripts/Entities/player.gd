@@ -71,7 +71,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(_delta: float) -> void:
 	var mousePos = get_global_mouse_position()
 	var direction = (mousePos - global_position).normalized()
-	velocity = (direction * speed * addedSpeed)
+	velocity = velocity.lerp(direction * speed * addedSpeed, 0.1)
 
 	# Varied speed based on distance from mouse
 	# I fucking hope I find a better way to do this
@@ -134,7 +134,7 @@ func handle_cannon_fire() -> void:
 	var direction = firingForce.normalized().rotated(deg_to_rad(randf_range(-5, 5)))
 
 	# Fire the first cannon ball, and see if we can fire the other two
-	fire_cannonball.emit(FrontCannon.global_position, direction, attackRange, damage, "Player")
+	fire_cannonball.emit(FrontCannon.global_position, direction, attackRange, damage, entityName)
 
 	if cannons >= 2:
 		var leftDir = direction.rotated(deg_to_rad(randf_range(-30, -20)))

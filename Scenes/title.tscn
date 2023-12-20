@@ -1,13 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://28dxtmy5x13u"]
+[gd_scene load_steps=7 format=3 uid="uid://w3sev5h8rwxg"]
 
-[ext_resource type="Script" path="res://Scripts/Global/game_manager.gd" id="1_a6ryt"]
-[ext_resource type="Script" path="res://Scripts/Entities/PlayersManager.gd" id="2_nbdv0"]
-[ext_resource type="Script" path="res://Scripts/Entities/EnemyManager.gd" id="3_sd12j"]
-[ext_resource type="TileSet" uid="uid://b2qx1ml6054ei" path="res://Tilesheets/tilesheet.tres" id="4_5v4fe"]
-[ext_resource type="PackedScene" uid="uid://bfcaygqjahqvo" path="res://Scenes/GUI Related/buy_menu.tscn" id="6_lx46s"]
-[ext_resource type="PackedScene" uid="uid://oq8ex8vsv1il" path="res://Scenes/GUI Related/gui.tscn" id="6_v76wr"]
+[ext_resource type="TileSet" uid="uid://b2qx1ml6054ei" path="res://Tilesheets/tilesheet.tres" id="1_1smjk"]
+[ext_resource type="Script" path="res://Scripts/GUI/title.gd" id="1_vvr54"]
+[ext_resource type="Texture2D" uid="uid://pl3ebfiy510k" path="res://Sprites/title.png" id="2_8fldf"]
 
-[sub_resource type="Shader" id="Shader_d5tn4"]
+[sub_resource type="Shader" id="Shader_0j2m4"]
 code = "shader_type canvas_item;
 
 
@@ -153,8 +150,8 @@ void fragment() {
 	COLOR.rgb = vec3(water(uv * tile + offset, vec3(0,1,0), TIME * distortion_speed));
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ui55b"]
-shader = SubResource("Shader_d5tn4")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tuufp"]
+shader = SubResource("Shader_0j2m4")
 shader_parameter/WATER_COL = Color(0.176471, 0.635294, 0.85098, 1)
 shader_parameter/WATER2_COL = Color(0.0588235, 0.529412, 0.776471, 1)
 shader_parameter/FOAM_COL = Color(0.87451, 0.988235, 1, 1)
@@ -162,39 +159,44 @@ shader_parameter/distortion_speed = 0.0
 shader_parameter/tile = Vector2(2, 2)
 shader_parameter/offset = Vector2(0, 0)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_dkkdw"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_aruuo"]
 
-[node name="World" type="Node2D" groups=["game_manager"]]
-script = ExtResource("1_a6ryt")
+[node name="TitleScreen" type="Node2D"]
+script = ExtResource("1_vvr54")
 
 [node name="WaterShader" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_ui55b")
-position = Vector2(584.5, 369)
+material = SubResource("ShaderMaterial_tuufp")
+position = Vector2(630, 389)
 scale = Vector2(1479, 924)
-texture = SubResource("CanvasTexture_dkkdw")
-
-[node name="PlayersManager" type="Node2D" parent="."]
-position = Vector2(0, -1)
-script = ExtResource("2_nbdv0")
-
-[node name="EnemyManager" type="Node2D" parent="."]
-script = ExtResource("3_sd12j")
-
-[node name="SpawnTimer" type="Timer" parent="EnemyManager"]
-one_shot = true
-autostart = true
-
-[node name="Projectiles" type="Node2D" parent="."]
-unique_name_in_owner = true
+texture = SubResource("CanvasTexture_aruuo")
 
 [node name="TileMap" type="TileMap" parent="."]
+position = Vector2(23, 22)
 scale = Vector2(0.5, 0.5)
-tile_set = ExtResource("4_5v4fe")
+tile_set = ExtResource("1_1smjk")
 format = 2
-layer_0/tile_data = PackedInt32Array(-65539, 196610, 2, -3, 524290, 2, 65533, 524290, 1, 131069, 524290, 2, 196605, 524290, 1, 262141, 524290, 2, 327677, 524290, 1, 393213, 524290, 2, 458749, 524290, 1, 524285, 524290, 2, 589821, 524290, 1, 655357, 524290, 2, 720893, 524290, 1, 786429, 524290, 2, 851965, 196610, 3, -65538, 393218, 3, -65537, 458754, 3, -131072, 393218, 3, -131071, 458754, 3, -131070, 393218, 3, -131069, 458754, 3, -131068, 393218, 3, -131067, 458754, 3, -131066, 393218, 3, -131065, 458754, 3, -131064, 393218, 3, -131063, 458754, 3, -131062, 393218, 3, -131061, 458754, 3, -131060, 393218, 3, -131059, 458754, 3, -131058, 393218, 3, -131057, 458754, 3, -131056, 393218, 3, -131055, 458754, 3, -131054, 393218, 3, -131053, 458754, 3, -131052, 262146, 2, -65516, 327682, 1, 20, 327682, 2, 65556, 327682, 1, 131092, 327682, 2, 196628, 327682, 1, 262164, 327682, 2, 327700, 327682, 1, 393236, 327682, 2, 458772, 327682, 1, 524308, 327682, 2, 589844, 327682, 1, 655380, 327682, 2, 720916, 327682, 1, 786452, 262146, 3, 851966, 393218, 0, 851967, 458754, 0, 786432, 393218, 0, 786433, 458754, 0, 786434, 393218, 0, 786435, 458754, 0, 786436, 393218, 0, 786437, 458754, 0, 786438, 393218, 0, 786439, 458754, 0, 786440, 393218, 0, 786441, 458754, 0, 786442, 393218, 0, 786443, 458754, 0, 786444, 393218, 0, 786445, 458754, 0, 786446, 393218, 0, 786447, 458754, 0, 786448, 393218, 0, 786449, 458754, 0, 786450, 393218, 0, 786451, 458754, 0)
+layer_0/tile_data = PackedInt32Array(0, 393218, 3, 1, 393218, 3, 2, 458754, 3, 3, 393218, 3, 4, 458754, 3, 5, 393218, 3, 6, 393218, 3, 7, 458754, 3, 8, 393218, 3, 9, 393218, 3, 10, 393218, 3, 11, 393218, 3, 12, 458754, 3, 13, 393218, 3, 14, 393218, 3, 15, 393218, 3, 16, 458754, 3, 17, 393218, 3, 18, 393218, 3, 19, 393218, 3, -65536, 458754, 1, -65535, 458754, 2, -65534, 393218, 2, -65533, 393218, 2, -65532, 458754, 1, -65531, 458754, 1, -65530, 458754, 2, -65529, 458754, 1, -65528, 393218, 1, -65527, 393218, 2, -65526, 393218, 1, -65525, 393218, 2, -65524, 458754, 2, -65523, 393218, 2, -65522, 393218, 1, -65521, 393218, 2, -65520, 393218, 1, -65519, 393218, 2, -65518, 393218, 1, -65517, 393218, 1, 65535, 196610, 2, -1, 393218, 1, 131071, 524290, 2, 196607, 524290, 1, 262143, 524290, 1, 327679, 524290, 1, 393215, 524290, 2, 458751, 524290, 1, 524287, 524290, 1, 589823, 524290, 2, 655359, 524290, 1, 720895, 524290, 1)
 
-[node name="GUI" parent="." groups=["gui"] instance=ExtResource("6_v76wr")]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(600, 289)
+texture = ExtResource("2_8fldf")
 
-[node name="BuyMenu" parent="." groups=["buyMenu"] instance=ExtResource("6_lx46s")]
+[node name="UI" type="Node" parent="."]
 
-[connection signal="timeout" from="EnemyManager/SpawnTimer" to="EnemyManager" method="_on_spawn_timer_timeout"]
+[node name="Button" type="Button" parent="UI"]
+offset_left = 517.0
+offset_top = 587.0
+offset_right = 617.0
+offset_bottom = 622.0
+text = "Play"
+
+[node name="LineEdit" type="LineEdit" parent="UI"]
+offset_left = 477.0
+offset_top = 514.0
+offset_right = 677.0
+offset_bottom = 545.0
+placeholder_text = "Enter Player Name..."
+
+[connection signal="pressed" from="UI/Button" to="." method="_on_button_pressed"]
+[connection signal="text_changed" from="UI/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="UI/LineEdit" to="." method="_on_line_edit_text_submitted"]
